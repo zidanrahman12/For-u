@@ -1,0 +1,63 @@
+"use client"
+
+import { motion } from "framer-motion"
+
+export default function Screen2({ onNext }) {
+    const handleReveal = () => {
+        // Trigger audio playback
+        const audio = new Audio("/romantic-song.mp3")
+        audio.play().catch((e) => console.log("Audio play failed:", e))
+
+        // Navigate to lyrics screen
+        onNext()
+    }
+
+    return (
+        <div className="min-h-screen bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70 flex flex-col items-center justify-center p-8 relative overflow-hidden gap-8">
+
+            {/* GIF */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="flex items-center justify-center"
+            >
+                <div className="">
+                    <div className="text-6xl">🤗</div>
+                </div>
+            </motion.div>
+
+            {/* Center text */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.8, staggerChildren: 0.3 }}
+                className="text-center space-y-6 flex flex-col justify-center"
+            >
+                <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-4xl md:text-5xl font-bold text-white leading-tight"
+                >
+                    Ready for the truth? 💫
+                </motion.h1>
+            </motion.div>
+
+            {/* Bottom button */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.3 }}
+                className="pb-8"
+            >
+                <button
+                    onClick={handleReveal}
+                    className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold py-4 px-12 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30 animate-pulse"
+                >
+                    Show Me 💖
+                </button>
+            </motion.div>
+        </div>
+    )
+}
