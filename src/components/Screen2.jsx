@@ -3,15 +3,6 @@
 import { motion } from "framer-motion"
 
 export default function Screen2({ onNext }) {
-    const handleReveal = () => {
-        // Trigger audio playback
-        const audio = new Audio("/romantic-song.mp3")
-        audio.play().catch((e) => console.log("Audio play failed:", e))
-
-        // Navigate to lyrics screen
-        onNext()
-    }
-
     return (
         <div className="min-h-screen bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70 flex flex-col items-center justify-center p-8 relative overflow-hidden gap-8">
 
@@ -52,7 +43,7 @@ export default function Screen2({ onNext }) {
                 className="pb-8"
             >
                 <button
-                    onClick={handleReveal}
+                    onClick={onNext}
                     className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold py-4 px-12 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30 animate-pulse"
                 >
                     Show Me 💖
