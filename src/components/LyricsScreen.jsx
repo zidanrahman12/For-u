@@ -27,43 +27,22 @@ export default function LyricsScreen() {
                 setCurrentLyric((prev) => prev + 1)
                 setShowLyric(true)
             }, 500)
-        }, 3000)
+        }, 2200)
 
         return () => clearInterval(interval)
     }, [currentLyric])
 
-    // Floating particles
-    const particles = Array.from({ length: 20 }, (_, i) => (
-        <motion.div
-            key={i}
-            className="absolute text-pink-300 text-xl"
-            initial={{
-                x: Math.random() * window.innerWidth,
-                y: window.innerHeight + 50,
-                opacity: 0,
-            }}
-            animate={{
-                y: -50,
-                opacity: [0, 1, 0],
-                x: Math.random() * window.innerWidth,
-            }}
-            transition={{
-                duration: Math.random() * 3 + 4,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: Math.random() * 2,
-            }}
-        >
-            {Math.random() > 0.5 ? "💖" : "✨"}
-        </motion.div>
-    ))
-
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 flex items-center justify-center p-8 relative overflow-hidden">
-            {/* Background particles */}
-            <div className="absolute inset-0">{particles}</div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ease: "easeOut" }}
+            className="min-h-screen bg-gradient-to-tr from-pink-950/80 via-black to-purple-950/80 flex items-center justify-center p-8 relative overflow-hidden">
 
-            {/* Ambient glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 blur-3xl"></div>
+            {/* Animated Gradient Layer */}
+            {/* <div className="absolute inset-0 animate-gradient bg-gradient-to-tr from-gray-950 via-black to-purple-950"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/10 via-pink-900/10 to-purple-900/10"></div> */}
+
 
             {/* Lyrics container */}
             <div className="text-center z-10 max-w-4xl mx-auto">
@@ -78,7 +57,7 @@ export default function LyricsScreen() {
                                 duration: 0.8,
                                 ease: "easeOut",
                             }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-wide"
+                            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-wide will-change-transform"
                             style={{
                                 textShadow:
                                     "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 192, 203, 0.3)",
@@ -96,11 +75,18 @@ export default function LyricsScreen() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none bg-black"
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none "
                 >
                     {/* <div className="text-9xl text-pink-500/80 animate-pulse">❤️</div> */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
+                    >
+                        <img src="/gifs/3.gif" className="w-60" alt="flower" />
+                    </motion.div>
                 </motion.div>
             )}
-        </div>
+        </motion.div>
     )
 }

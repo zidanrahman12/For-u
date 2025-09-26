@@ -4,7 +4,12 @@ import { motion } from "framer-motion"
 
 export default function Screen2({ onNext }) {
     return (
-        <div className="min-h-screen bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70 flex flex-col items-center justify-center p-8 relative overflow-hidden gap-8">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ease: "easeOut" }}
+            exit={{ opacity: 0 }}
+            className="min-h-screen bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70 flex flex-col items-center justify-center p-8 relative overflow-hidden gap-8">
 
             {/* GIF */}
             <motion.div
@@ -13,9 +18,7 @@ export default function Screen2({ onNext }) {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="flex items-center justify-center"
             >
-                <div className="">
-                    <div className="text-6xl">🤗</div>
-                </div>
+                <img src="/gifs/2.gif" className="w-40" alt="blushing" />
             </motion.div>
 
             {/* Center text */}
@@ -31,7 +34,7 @@ export default function Screen2({ onNext }) {
                     transition={{ duration: 0.8 }}
                     className="text-4xl md:text-5xl font-bold text-white leading-tight"
                 >
-                    Ready for the truth? 💫
+                    Are you really ready to know...? 💖
                 </motion.h1>
             </motion.div>
 
@@ -44,11 +47,11 @@ export default function Screen2({ onNext }) {
             >
                 <button
                     onClick={onNext}
-                    className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold py-4 px-12 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30 animate-pulse"
+                    className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold py-4 px-12 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30"
                 >
                     Show Me 💖
                 </button>
             </motion.div>
-        </div>
+        </motion.div>
     )
 }

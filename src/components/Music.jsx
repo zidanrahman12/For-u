@@ -13,7 +13,7 @@ export default function Music({ shouldPlay }) {
     }, [shouldPlay])
 
     return (
-        <audio ref={audioRef} loop preload="auto">
+        <audio ref={audioRef} preload="auto">
             <source src="/audio/bg.mp3" type="audio/mpeg" />
         </audio>
     )

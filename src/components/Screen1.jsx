@@ -4,7 +4,12 @@ import { motion } from "framer-motion"
 
 export default function Screen1({ onNext }) {
     return (
-        <div className="min-h-screen bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70 flex flex-col items-center justify-center p-8 relative overflow-hidden gap-8">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            exit={{ opacity: 0 }}
+            className="min-h-screen bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70 flex flex-col items-center justify-center p-8 relative overflow-hidden gap-8">
 
             {/* GIF */}
             <motion.div
@@ -13,9 +18,7 @@ export default function Screen1({ onNext }) {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="flex items-center justify-center"
             >
-                <div className="">
-                    <div className="text-6xl">🐼</div>
-                </div>
+                <img src="/gifs/1.gif" className="w-40" alt="waving" />
             </motion.div>
 
             {/* Center text */}
@@ -25,8 +28,8 @@ export default function Screen1({ onNext }) {
                 transition={{ duration: 1, delay: 1 }}
                 className="text-center space-y-4 flex flex-col justify-center"
             >
-                <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">I want to tell you something…</h1>
-                <p className="text-xl md:text-2xl text-purple-200 font-light">But only you deserve to see this ✨</p>
+                <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">I have a little secret for you...</h1>
+                <p className="text-2xl md:text-3xl text-purple-200 font-light">And trust me... only YOU deserve this ✨</p>
             </motion.div>
 
             {/* Bottom button */}
@@ -40,9 +43,9 @@ export default function Screen1({ onNext }) {
                     onClick={onNext}
                     className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-4 px-12 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/30"
                 >
-                    Next →
+                    Open it 🎁
                 </button>
             </motion.div>
-        </div>
+        </motion.div>
     )
 }
