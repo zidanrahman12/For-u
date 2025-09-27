@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
+import { Heart, Sparkles, Star } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export default function LyricsScreen() {
@@ -14,6 +15,34 @@ export default function LyricsScreen() {
     const [currentLyric, setCurrentLyric] = useState(0)
     const [showLyric, setShowLyric] = useState(true)
     const [finished, setFinished] = useState(false)
+    const elements = [
+        { Icon: Heart, color: "text-pink-400", size: "w-4 h-4" },
+        { Icon: Star, color: "text-yellow-300", size: "w-3 h-3" },
+        { Icon: Sparkles, color: "text-purple-300", size: "w-3 h-3" },
+    ]
+
+    const [floatingItems, setFloatingItems] = useState([])
+    const [stars, setStars] = useState([])
+
+    useEffect(() => {
+        const width = window.innerWidth
+
+        const items = Array.from({ length: 10 }).map((_, i) => ({
+            x: Math.random() * width,
+            delay: Math.random() * 10,
+            duration: Math.random() * 6 + 8,
+            Element: elements[i % elements.length],
+        }))
+        setFloatingItems(items)
+
+        const twinkles = Array.from({ length: 20 }).map(() => ({
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            delay: Math.random() * 2,
+            duration: Math.random() * 4 + 3,
+        }))
+        setStars(twinkles)
+    }, [])
 
     useEffect(() => {
         if (currentLyric >= lyrics.length) {
@@ -27,7 +56,7 @@ export default function LyricsScreen() {
                 setCurrentLyric((prev) => prev + 1)
                 setShowLyric(true)
             }, 500)
-        }, 2200)
+        }, 2100)
 
         return () => clearInterval(interval)
     }, [currentLyric])
@@ -39,10 +68,40 @@ export default function LyricsScreen() {
             transition={{ ease: "easeOut" }}
             className="min-h-screen bg-gradient-to-tr from-pink-950/80 via-black to-purple-950/80 flex items-center justify-center p-8 relative overflow-hidden">
 
-            {/* Animated Gradient Layer */}
-            {/* <div className="absolute inset-0 animate-gradient bg-gradient-to-tr from-gray-950 via-black to-purple-950"></div>
-            <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/10 via-pink-900/10 to-purple-900/10"></div> */}
+            {/* Floating elements */}
+            <div className="fixed inset-0 pointer-events-none ">
+                {floatingItems.map(({ x, delay, duration, Element }, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute opacity-25"
+                        initial={{ x, y: window.innerHeight + 50, opacity: 0 }}
+                        animate={{
+                            y: -100,
+                            x: Math.random() * window.innerWidth,
+                            rotate: [0, 360],
+                            opacity: [0, 0.3, 0],
+                        }}
+                        transition={{
+                            duration,
+                            delay,
+                            repeat: Infinity,
+                            ease: "easeOut",
+                        }}
+                    >
+                        <Element.Icon className={`${Element.color} ${Element.size} fill-current`} />
+                    </motion.div>
+                ))}
 
+                {stars.map(({ left, top, delay, duration }, i) => (
+                    <motion.div
+                        key={`star-${i}`}
+                        className="absolute w-1 h-1 bg-white rounded-full opacity-30"
+                        style={{ left, top }}
+                        animate={{ opacity: [0, 0.6, 0], scale: [0, 1, 0] }}
+                        transition={{ duration, delay, repeat: Infinity }}
+                    />
+                ))}
+            </div>
 
             {/* Lyrics container */}
             <div className="text-center z-10 max-w-4xl mx-auto">
@@ -75,9 +134,8 @@ export default function LyricsScreen() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none "
+                    className="absolute inset-0 flex flex-col gap-5 items-center justify-center pointer-events-none "
                 >
-                    {/* <div className="text-9xl text-pink-500/80 animate-pulse">❤️</div> */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -85,6 +143,13 @@ export default function LyricsScreen() {
                     >
                         <img src="/gifs/3.gif" className="w-60" alt="flower" />
                     </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ delay: 1, duration: 1, ease: "easeInOut" }}
+                        className="text-3xl md:text-4xl font-semibold px-4 text-center">
+                        For My Haseen Girl ❤️
+                    </motion.h2>
                 </motion.div>
             )}
         </motion.div>

@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${kalam.className} antialiased`}
+        className={`${kalam.className} antialiased select-none`}
       >
         {children}
       </body>
