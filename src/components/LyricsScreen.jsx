@@ -66,7 +66,7 @@ export default function LyricsScreen() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ ease: "easeOut" }}
-            className="min-h-screen bg-gradient-to-tr from-pink-950/80 via-black to-purple-950/80 flex items-center justify-center p-8 relative overflow-hidden">
+            className="min-h-screen bg-gradient-to-tr from-pink-950/80 via-black to-purple-950/80 flex items-center justify-center p-6 relative overflow-hidden">
 
             {/* Floating elements */}
             <div className="fixed inset-0 pointer-events-none ">
@@ -148,7 +148,7 @@ export default function LyricsScreen() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ delay: 1, duration: 1, ease: "easeInOut" }}
                         className="text-3xl md:text-4xl font-semibold px-4 text-center">
-                        For My Haseen Girl ❤️
+                        For My Haseen Girl❤️
                     </motion.h2>
                 </motion.div>
             )}
